@@ -48,12 +48,12 @@ function FreehandTool() {
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <div><b>Freehand Tool</b></div>
                 <label>Brush Size:
-                    <input id="freehandSize" type="range" min="1" max="50" value="4" />
-                    <span id="freehandSizeLabel">4px</span>
+                    <input id="freehandSize" type="range" min="1" max="50" value="${brushSize}" />
+                    <span id="freehandSizeLabel">${brushSize}px</span>
                 </label>
                 <label>Opacity:
-                    <input id="freehandOpacity" type="range" min="10" max="255" value="255" />
-                    <span id="freehandOpacityLabel">100%</span>
+                    <input id="freehandOpacity" type="range" min="10" max="255" value="${brushOpacity}" />
+                    <span id="freehandOpacityLabel">${Math.round((brushOpacity / 255) * 100)}%</span>
                 </label>
             </div>
         `);
