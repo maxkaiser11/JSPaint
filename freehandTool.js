@@ -10,7 +10,13 @@ function FreehandTool() {
     var previousMouseX = -1;
     var previousMouseY = -1;
 
+    var brushSize = 4;
+    var brushOpacity = 255;
+
+
     this.draw = function() {
+        strokeWeight(brushSize);
+        stroke(red(colourP.selectedColour), green(colourP.selectedColour), blue(colourP.selectedColour), brushOpacity);
         //if the mouse is pressed
         if (mouseIsPressed) {
             //check if they previousX and Y are -1. set them to the current
@@ -35,4 +41,36 @@ function FreehandTool() {
             previousMouseY = -1;
         }
     };
+
+    // *** START OF CODE WRITTEN WITHOUT ANY HELP *** //
+    this.populateOptions = function() {
+        select(".options").html(`
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div><b>Freehand Tool</b></div>
+                <label>Brush Size:
+                    <input id="freehandSize" type="range" min="1" max="50" value="4" />
+                    <span id="freehandSizeLabel">4px</span>
+                </label>
+                <label>Opacity:
+                    <input id="freehandOpacity" type="range" min="10" max="255" value="255" />
+                    <span id="freehandOpacityLabel">100%</span>
+                </label>
+            </div>
+        `);
+
+        select("#freehandSize").input(function() {
+            brushSize = Number(this.elt.value);
+            select("#freehandSizeLabel").html(brushSize + "px");
+        });
+
+        select("#freehandOpacity").input(function() {
+            brushOpacity = Number(this.elt.value);
+            select("#freehandOpacityLabel").html(Math.round((brushOpacity / 255) * 100) + "%");
+        });
+    };
+
+    this.unselectTool = function() {
+        select(".options").html("");
+    };
+    // *** END OF CODE WRITTEN WITHOUT ANY HELP *** //
 }
