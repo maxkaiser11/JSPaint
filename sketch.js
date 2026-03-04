@@ -5,7 +5,6 @@ var colourP = null;
 var helpers = null;
 
 var canvasHistory;
-var prevMousePressed = false;
 
 function setup() {
 
@@ -20,12 +19,6 @@ function setup() {
         background(255);
         loadPixels();
     }, 0);
-
-    function windowResized() {
-        resizeCanvas(canvasContainer.size().width, canvasContainer.size().height);
-        background(255);
-        loadPixels();
-    }
 
     //create helper functions and the colour palette
     helpers = new HelperFunctions();
@@ -46,6 +39,18 @@ function setup() {
     /* CODE WRITTEN BY MYSELF WITH NO HELP*/
     /* START OF CODE */
     canvasHistory = new HistoryManager(30);
+
+    // Undo Button
+    select("#undoButton").mouseClicked(function() {
+        if (canvasHistory) canvasHistory.undo();
+    });
+
+    // Redo Button
+    select("#redoButton").mouseClicked(function() {
+        if (canvasHistory) canvasHistory.redo();
+    });
+
+
     window.addEventListener("keydown", (e) => {
         // Ctrl+Z (undo)
         if (e.ctrlKey && !e.shiftKey && (e.key === "z" || e.key === "Z")) {
@@ -93,6 +98,11 @@ function mousePressed() {
     if (toolbox.selectedTool.mousePressed) {
         toolbox.selectedTool.mousePressed();
     }
+}
+
+function windowResized() {
+    resizeCanvas(canvasContainer.size().width, canvasContainer.size().height);
+    loadPixels();
 }
 /* END OF CODE WRITTEN BY MYSELF */
 

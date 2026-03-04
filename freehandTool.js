@@ -10,8 +10,10 @@ function FreehandTool() {
     var previousMouseX = -1;
     var previousMouseY = -1;
 
+    // *** START OF CODE WRITTEN WITHOUT ANY HELP *** //
     var brushSize = 4;
     var brushOpacity = 255;
+    // *** END OF CODE WRITTEN WITHOUT ANY HELP *** //
 
 
     this.draw = function() {
